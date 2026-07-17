@@ -38,19 +38,10 @@ export default defineNuxtConfig({
     asyncContext: true,
   },
   app: {
-    baseURL: "/rmcwiki/", // Change this to your desired base URL, or remove it if you want to serve from the root.
-    cdnURL: "/rmcwiki/", // Change this to your desired CDN URL, or remove it if you want to serve from the root.
+    baseURL: "/RMC-Wiki/", // Change this to your desired base URL, or remove it if you want to serve from the root.
+    cdnURL: "/RMC-Wiki/", // Change this to your desired CDN URL, or remove it if you want to serve from the root.
     head: {
-      base: { href: "/rmcwiki/" }, // Change this to your desired base URL, or remove it if you want to serve from the root.
-      link: [
-        { rel: "icon", href: "favicon.ico", sizes: "32x32" },
-
-        { rel: "icon", href: "icon.svg", type: "image/svg+xml" },
-
-        { rel: "apple-touch-icon", href: "apple-touch-icon.png" },
-
-        { rel: "manifest", href: "site.webmanifest" },
-      ],
+      base: { href: "/RMC-Wiki/" }, // Change this to your desired base URL, or remove it if you want to serve from the root.
     },
   },
   ogImage: {
