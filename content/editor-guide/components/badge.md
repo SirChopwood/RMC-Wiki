@@ -8,85 +8,71 @@ navigation:
 
 # Badges
 
-The `badge` component displays small inline labels to indicate the status of features, APIs, or content.
+The `badge` component displays small inline labels to indicate the status of content.
 
 Badges can be placed anywhere inside normal Markdown text.
 
 ---
 
-## Basic Usage
-
-```md
-This feature is :badge{type="new"}.
-```
-
-Result:
-
-This feature is :badge{type="new"}.
-
----
-
-## Available Types
-
-| Type | Label |
-| :----------- | :----------- |
-| `new` | New |
-| `beta` | Beta |
-| `stable` | Stable |
-| `deprecated` | Deprecated |
-| `info` | Info |
-
----
-
 ## Examples
 
-### New
+### Weston-Yamada
 
 ```md
-:badge{type="new"}
+:badge{type="weya"}
 ```
 
-:badge{type="new"}
+:badge{type="weya"}
 
 ---
 
-### Beta
+### Three Sun Empire
 
 ```md
-:badge{type="beta"}
+:badge{type="tse"}
 ```
 
-:badge{type="beta"}
+:badge{type="tse"}
 
 ---
 
-### Stable
+### Socialist People's Protectorate
 
 ```md
-:badge{type="stable"}
+:badge{type="spp"}
 ```
 
-:badge{type="stable"}
+:badge{type="spp"}
 
 ---
 
-### Deprecated
+### United Nations Marine Corps
 
 ```md
-:badge{type="deprecated"}
+:badge{type="unmc"}
 ```
 
-:badge{type="deprecated"}
+:badge{type="unmc"}
 
 ---
 
-### Info
+### Colonial Liberation Front
 
 ```md
-:badge{type="info"}
+:badge{type="clf"}
 ```
 
-:badge{type="info"}
+:badge{type="clf"}
+
+---
+
+### Civilian
+
+```md
+:badge{type="civ"}
+```
+
+:badge{type="civ"}
 
 ---
 
@@ -95,27 +81,11 @@ This feature is :badge{type="new"}.
 You can override the default label by placing text inside the component.
 
 ```md
-:badge{type="beta"}[Experimental]
+:badge{type="unmc"}[Experimental]
 ```
 
 Result:
 
-:badge{type="beta"}[Experimental]
+:badge{type="unmc"}[Experimental]
 
 ---
-
-## Usage in Text
-
-Badges are designed to be used inline.
-
-```md
-Authentication :badge{type="stable"} is fully supported.
-
-The legacy API is :badge{type="deprecated"} and will be removed in a future release.
-```
-
-Result:
-
-Authentication :badge{type="stable"} is fully supported.
-
-The legacy API is :badge{type="deprecated"} and will be removed in a future release.
