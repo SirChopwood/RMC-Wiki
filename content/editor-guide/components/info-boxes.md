@@ -67,7 +67,7 @@ Remember to backup your files.
 
 ---
 
-### Warning
+### Alert
 
 ```md
 ::info-box{type="alert"}
@@ -77,6 +77,20 @@ This action cannot be undone.
 
 ::info-box{type="alert"}
 This action cannot be undone.
+::
+
+---
+
+### Help
+
+```md
+::info-box{type="help"}
+You can do this instead.
+::
+```
+
+::info-box{type="help"}
+You can do this instead.
 ::
 
 ---

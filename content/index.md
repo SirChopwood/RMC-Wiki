@@ -16,3 +16,7 @@ title: "Launchers"
 description: "Heavy weapons lugged about in the hands of specialists, often fielded for Anti-Armour roles."
 ---
 ::
+
+::info-box{type="important"}
+**Work-In-Progress:** Please keep in mind this site is in active development and things may quickly change. If you spot any major errors, please let me know.
+::
