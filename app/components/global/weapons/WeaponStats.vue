@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import WeaponStatsBar from "~/components/partials/WeaponStatsBar.vue";
+import WeaponStatsBar from "~/components/global/weapons/WeaponStatsBar.vue";
 
 const props = defineProps<{
   fireMode: Array<string>
