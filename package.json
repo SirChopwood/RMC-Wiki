@@ -10,7 +10,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "convert": "node --experimental-strip-types prototype_converter/script.ts"
   },
   "dependencies": {
     "@nuxt/content": "3.15.0",
@@ -27,7 +28,8 @@
     "tailwindcss": "^4.3.2",
     "unstorage": "^1.17.5",
     "vue": "^3.5.39",
-    "vue-router": "^5.1.0"
+    "vue-router": "^5.1.0",
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@release-it/conventional-changelog": "^11.0.1",

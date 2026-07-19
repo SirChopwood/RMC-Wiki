@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Prepare Convert Target Repo" type="BatchConfigurationType" factoryName="Batch">
+    <module name="RMC-Wiki" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="WORKING_DIRECTORY" value="./prototype_converter" />
+    <option name="PARENT_ENVS" value="true" />
+    <option name="SCRIPT_NAME" value="./prototype_converter/repo.bat" />
+    <option name="PARAMETERS" value="" />
+    <method v="2" />
+  </configuration>
+</component>
