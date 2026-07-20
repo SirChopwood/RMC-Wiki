@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import WeaponStatsBar from "~/components/global/weapons/WeaponStatsBar.vue";
+import StatsBar from "~/components/global/Weapon/StatsBar.vue";
 
 const props = defineProps<{
   magazines: Array<{
@@ -37,11 +37,11 @@ function getIconPath (path: string, state: string = "base") {
           <th class="h-full w-1/3">Capacity</th>
           <td class="">{{value.capacity}} Rounds</td>
         </tr>
-        <weapon-stats-bar
+        <stats-bar
             v-if="value.damage"
             type="damage"
             :value="value.damage"/>
-        <weapon-stats-bar
+        <stats-bar
             v-if="value.ap"
             type="ap"
             :value="value.ap"/>

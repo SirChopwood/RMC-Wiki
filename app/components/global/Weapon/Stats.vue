@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import WeaponStatsBar from "~/components/global/weapons/WeaponStatsBar.vue";
+import StatsBar from "~/components/global/Weapon/StatsBar.vue";
 
 const props = defineProps<{
   fireMode: Array<string>
@@ -29,19 +29,19 @@ const fireModes: Record<string, string> = {
           >{{mode}}</span>
         </td>
       </tr>
-      <weapon-stats-bar
+      <stats-bar
           v-if="props.accuracyWielded"
           type="accuracyWielded"
           :value="props.accuracyWielded"/>
-      <weapon-stats-bar
+      <stats-bar
           v-if="props.accuracyUnWielded"
           type="accuracyUnWielded"
           :value="props.accuracyUnWielded"/>
-      <weapon-stats-bar
+      <stats-bar
           v-if="props.fireRate"
           type="fireRate"
           :value="props.fireRate"/>
-      <weapon-stats-bar
+      <stats-bar
           v-if="props.recoil"
           type="recoil"
           :value="props.recoil"/>
