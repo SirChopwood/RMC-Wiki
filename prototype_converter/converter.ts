@@ -33,7 +33,7 @@ export class PrototypeConverter {
             if (this.verbose) console.log(`${chalk.bold.grey(filePath)}`)
             try {
                 const file = fs.readFileSync(filePath, 'utf8')
-                const data = YAML.parse(file, {strict: false}) as Array<any>
+                const data = YAML.parse(file, {strict: false, logLevel: "error"}) as Array<any>
                 for (const proto of data) {
                     if (proto.type !== "entity" || !proto.id) continue
                     await this.addPrototypeToCache(proto)
@@ -75,7 +75,7 @@ export class PrototypeConverter {
             if (this.verbose) console.log(`${chalk.grey(filePath)}`)
             try {
                 const file = fs.readFileSync(filePath, 'utf8')
-                const data = YAML.parse(file, {strict: false}) as Array<any>
+                const data = YAML.parse(file, {strict: false, logLevel: "error"}) as Array<any>
                 for (const proto of data) {
                     if (proto.type !== "entity") continue
                     if (!this.prototypeCache.has(proto.id)) {
