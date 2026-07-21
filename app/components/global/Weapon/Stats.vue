@@ -2,11 +2,7 @@
 import StatsBar from "~/components/global/Weapon/StatsBar.vue";
 
 const props = defineProps<{
-  fireMode: Array<string>
-  accuracyWielded: number
-  accuracyUnWielded: number
-  fireRate: number
-  recoil: number
+  stats: Record<string, string>
 }>()
 
 const fireModes: Record<string, string> = {
@@ -19,10 +15,10 @@ const fireModes: Record<string, string> = {
 <template>
   <table class="table-fixed max-w-full! w-full border-collapse text-md bg-content-bg">
     <tbody>
-      <tr class="h-10">
+      <tr v-if="props.stats.fireMode" class="h-10">
         <th class="h-full w-1/3">Fire Modes</th>
         <td class="relative h-full flex flex-row gap-4 items-center">
-            <span v-for="mode in props.fireMode"
+            <span v-for="mode in props.stats.fireMode"
                     class="hover:cursor-help hover:text-(--link) underline hover:decoration-(--link)"
                     :key="mode"
                     :title="fireModes[mode]"
@@ -30,21 +26,21 @@ const fireModes: Record<string, string> = {
         </td>
       </tr>
       <stats-bar
-          v-if="props.accuracyWielded"
+          v-if="props.stats.accuracyWielded"
           type="accuracyWielded"
-          :value="props.accuracyWielded"/>
+          :value="Number(props.stats.accuracyWielded)"/>
       <stats-bar
-          v-if="props.accuracyUnWielded"
+          v-if="props.stats.accuracyUnWielded"
           type="accuracyUnWielded"
-          :value="props.accuracyUnWielded"/>
+          :value="Number(props.stats.accuracyUnWielded)"/>
       <stats-bar
-          v-if="props.fireRate"
+          v-if="props.stats.fireRate"
           type="fireRate"
-          :value="props.fireRate"/>
+          :value="Number(props.stats.fireRate)"/>
       <stats-bar
-          v-if="props.recoil"
+          v-if="props.stats.recoil"
           type="recoil"
-          :value="props.recoil"/>
+          :value="Number(props.stats.recoil)"/>
     </tbody>
   </table>
 </template>

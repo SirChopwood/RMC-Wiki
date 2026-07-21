@@ -4,6 +4,7 @@ import * as fs from "node:fs";
 import {PrototypeConverter} from "../converter.ts";
 // @ts-ignore
 import Prototype from "../prototype.ts";
+import chalk from "chalk";
 
 export default class WeaponsPrototypeConverter extends PrototypeConverter {
     weaponTypeParents = [
@@ -38,8 +39,13 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
     ]
 
     async run(): Promise<void> {
+        await this.addDirectoriesToCache(["_RMC14/Entities/Objects/Weapons"])
+
         for await (const wepCat of this.weaponCategories) {
-            fs.writeFileSync(path.join(this.contentDir, "weapons", `${wepCat.toLowerCase()}.md`), await this.convertPrototypesInDirectory(`_RMC14/Entities/Objects/Weapons/Guns/${wepCat}`))
+            fs.writeFileSync(
+                path.join(this.contentDir, "weapons", `${wepCat.toLowerCase()}.md`),
+                await this.convertDirectories([`_RMC14/Entities/Objects/Weapons/Guns/${wepCat}`])
+            )
         }
     }
 
@@ -60,6 +66,24 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
             return ""
         }
 
+        let formattedData = {
+            displayName: prototype.name || "Undefined Prototype",
+            sprite: [] as Array<string>,
+            id: prototype.id || "Undefined Prototype",
+            description: prototype.description || "No Description Given",
+            stats: {} as Record<string, string>,
+            attachments: {} as Record<string, Array<string>>,
+            magazines: [] as Array<{
+                name: string,
+                id: string
+                icon: string,
+                color?: string,
+                capacity?: number,
+                damage?: number,
+                ap?: number,
+            }>,
+            lore: ""}
+
         let attachments: Record<string, Array<string>> = {}
         if (prototype.components.has("AttachableHolder")) {
             for (let slotName of Object.keys(prototype.components.get("AttachableHolder").slots)) {
@@ -68,136 +92,82 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
             }
         }
 
-        let stats = new Map()
-        prototype.tryGetComponent("RMCSelectiveFire", ["baseFireModes"], (value) => {
-            stats.set("fireMode", `[${value.join(", ")}]`)
+        let stats: Record<string, string> = {}
+        await prototype.tryGetPrototypeValue(prototype, "RMCSelectiveFire", ["baseFireModes"], async (value) => {
+            stats["fireMode"] = value
         })
-        prototype.tryGetComponent("RMCWeaponAccuracy", ["accuracyMultiplier"], (value) => {
-            stats.set("accuracyWielded", value)
+        await prototype.tryGetPrototypeValue(prototype, "RMCWeaponAccuracy", ["accuracyMultiplier"], async (value) => {
+            stats["accuracyWielded"] = value
         })
-        prototype.tryGetComponent("RMCWeaponAccuracy", ["accuracyMultiplierUnwielded"], (value) => {
-            stats.set("accuracyUnWielded", value)
+        await prototype.tryGetPrototypeValue(prototype, "RMCWeaponAccuracy", ["accuracyMultiplierUnwielded"], async (value) => {
+            stats["accuracyUnWielded"] = value
         })
-        prototype.tryGetComponent("RMCSelectiveFire", ["baseFireRate"], (value) => {
-            stats.set("fireRate", value)
+        await prototype.tryGetPrototypeValue(prototype, "RMCSelectiveFire", ["baseFireRate"], async (value) => {
+            stats["fireRate"] = value
         })
-        prototype.tryGetComponent("RMCSelectiveFire", ["recoilUnwielded"], (value) => {
-            stats.set("recoil", value)
+        await prototype.tryGetPrototypeValue(prototype, "RMCSelectiveFire", ["recoilUnwielded"], async (value) => {
+            stats["recoil"] = value
         })
 
-        let sprite = ["Effects/crayondecals.rsi/questionmark.png"]
-        prototype.tryGetComponent("Sprite", [], (value) => {
+        formattedData.magazines = [
+            {
+                name: "M54C magazine (10x24mm)",
+                id: "CMMagazineRifleM54C",
+                icon: "_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi",
+                capacity: 40,
+                damage: 40,
+                ap: 5
+            },
+            {
+                name: "M54C AP magazine (10x24mm)",
+                id: "CMMagazineRifleM54CAP",
+                icon: "_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi",
+                color: "#1F951F",
+                capacity: 40,
+                damage: 30,
+                ap: 40
+            },
+            {
+                name: "M54C extended magazine (10x24mm)",
+                id: "CMMagazineRifleM54CExt",
+                icon: "_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi",
+                capacity: 60,
+                damage: 40,
+                ap: 5
+            }
+        ]
+
+        // If this specific item doesnt have lore, dont get from parents
+        formattedData.lore = prototype.tryGetComponentValue("RMCLoreExaminable", ["content"], "")
+
+        formattedData.sprite = ["Effects/crayondecals.rsi/questionmark.png"]
+        await prototype.tryGetPrototypeValue(prototype, "Sprite", [], async (value) => {
             if (value.layers && value.layers.length > 0) {
-                sprite = []
+                formattedData.sprite = []
                 for (const layer of value.layers) {
                     if (layer.sprite) {
-                        sprite.push(`${layer.sprite}/${layer.state}.png`)
+                        formattedData.sprite.push(`${layer.sprite}/${layer.state}.png`)
                     } else {
-                        sprite.push(`${value.sprite}/${layer.state}.png`)
+                        formattedData.sprite.push(`${value.sprite}/${layer.state}.png`)
                     }
                 }
             } else if (value.sprite && value.state) {
-                sprite = [`${value.sprite}/${value.state}.png`]
+                formattedData.sprite = [`${value.sprite}/${value.state}.png`]
             }
         })
-        return this.fillTemplate(
-            prototype.name,
-            sprite,
-            prototype.id,
-            prototype.description,
-            stats,
-            attachments,
-            [
-                {
-                    name: "M54C magazine (10x24mm)",
-                    id: "CMMagazineRifleM54C",
-                    icon: "_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi",
-                    capacity: 40,
-                    damage: 40,
-                    ap: 5
-                },
-                {
-                    name: "M54C AP magazine (10x24mm)",
-                    id: "CMMagazineRifleM54CAP",
-                    icon: "_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi",
-                    color: "#1F951F",
-                    capacity: 40,
-                    damage: 30,
-                    ap: 40
-                },
-                {
-                    name: "M54C extended magazine (10x24mm)",
-                    id: "CMMagazineRifleM54CExt",
-                    icon: "_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi",
-                    capacity: 60,
-                    damage: 40,
-                    ap: 5
-                }
-            ],
-            prototype.tryGetComponentValue("RMCLoreExaminable", ["content"], "")
-        )
-    }
-
-
-
-    fillTemplate(
-        displayName: string,
-        sprite: Array<string>,
-        id: string,
-        description: string,
-        stats: Map<string, string>,
-        attachments: Record<string, Array<string>>,
-        magazines: Array<{
-            name: string,
-            id: string
-            icon: string,
-            color?: string,
-            capacity?: number,
-            damage?: number,
-            ap?: number,
-        }>,
-        lore?: string
-    ) {
-        let newAttachments = ""
-        for (const key of Object.keys(attachments)) {
-            newAttachments += `\n    ${key}: ${JSON.stringify(attachments[key])}`
-        }
-        newAttachments = newAttachments.replace("\n","")
-
-        let newStats = ""
-        // @ts-ignore
-        for (const [key, value] of stats.entries()) {
-            newStats += `\n${key}: ${value}`
-        }
-        newStats = newStats.replace("\n","")
-
-        let template =  `## ${displayName}
-::weapon-profile
+        if (this.verbose) console.log(`- ${chalk.green(prototype.id)} "${prototype.name}"`)
+        return `
+## ${formattedData.displayName}
+:weapon-profile{:sprite='${JSON.stringify(formattedData.sprite)}'}
+:hatnote{icon=false}[ID: ${formattedData.id}]
+:pull-quote[${formattedData.description}]
+:weapon-stats{:stats='${JSON.stringify(formattedData.stats)}'}
+:weapon-attachments{:attachments='${JSON.stringify(formattedData.attachments)}'}
+:weapon-ammunition{:magazines='${JSON.stringify(formattedData.magazines)}'}
+${formattedData.lore ? `:collapsible{title="Show Lore"}[${formattedData.lore}]` : ""}
 ---
-sprite: ${JSON.stringify(sprite)}
----
-::
-:hatnote{icon=false}[ID: ${id}]
-:pull-quote[${description}]
-::weapon-stats
----
-${newStats}
----
-::
-::weapon-attachments
----
-attachments:
-${newAttachments}
----
-::
-::weapon-ammunition
----
-magazines: ${JSON.stringify(magazines)}
----
-::`
-        if (lore) template += `\n:collapsible{title="Show Lore"}[${lore}]`
-        template += `\n<br><br><br><br>\n`
-        return template
+\n<br><br><br><br><br><br><br><br>\n
+`
     }
 }
 
