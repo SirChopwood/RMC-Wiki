@@ -2,19 +2,32 @@ import * as path from 'path';
 import * as fs from "node:fs";
 import * as YAML from 'yaml'
 // @ts-ignore
-import Prototype from "./prototype.ts";
+import Prototype from "./robustClasses/prototype.ts";
+// @ts-ignore
+import Locale from "./robustClasses/locale.ts";
 import chalk from 'chalk';
 
 export class PrototypeConverter {
     verbose: boolean
-    prototypesDir: string
+    resourcesDir: string
     contentDir: string
     prototypeCache: Map<string, Prototype> = new Map()
+    localeCache: Map<string, Locale> = new Map()
 
-    constructor(verbose: boolean, prototypesDir: string, contentDir: string) {
+    constructor(verbose: boolean, resourcesDir: string, contentDir: string) {
         this.verbose = verbose
-        this.prototypesDir = prototypesDir
+        this.resourcesDir = resourcesDir
         this.contentDir = contentDir
+
+    }
+
+    async setup() {
+        this.localeCache.set("en-US", new Locale(this, this.resourcesDir, "en-US", "_RMC14"))
+        await this.localeCache.get("en-US").setup()
+    }
+
+    getLocaleString(target: string, language: string = "en-US") {
+        return this.localeCache.get(language).getLocaleString(target)
     }
 
     // Create new Prototype Class and add it to the cache
@@ -40,9 +53,8 @@ export class PrototypeConverter {
                     count++
                 }
             } catch (error) {
-                //console.error(error)
+                if (this.verbose) console.error(error)
             }
-            //console.log("...Done!")
         }
         console.log(chalk.bold.greenBright(`Added ${count} Prototypes to the Cache!`))
     }
@@ -51,7 +63,7 @@ export class PrototypeConverter {
     protected async getFilesInDirectory(directories: Array<string>) {
         let files = []
         for await (let dirPath of directories) {
-            let fullPath = path.join(this.prototypesDir, dirPath)
+            let fullPath = path.join(this.resourcesDir, "Prototypes", dirPath)
             if (!fs.existsSync(fullPath)) {
                 console.log(`Unable to find Prototypes directory: ${path}`)
             }
@@ -89,9 +101,8 @@ export class PrototypeConverter {
                     }
                 }
             } catch (error) {
-                //console.error(error)
+                if (this.verbose) console.error(error)
             }
-            //console.log("...Done!")
         }
         console.log(chalk.bold.greenBright(`Converted ${count} Prototypes!`))
         return result

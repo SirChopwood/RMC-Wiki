@@ -6,7 +6,7 @@ import chalk from "chalk";
 
 // @ts-ignore
 const __dirname = import.meta.dirname
-const prototypesDir = path.join(__dirname, "../RMC14/Resources/Prototypes")
+const resourcesDir = path.join(__dirname, "../RMC14/Resources")
 const converterDir = path.join(__dirname, "converters")
 const contentDir = path.join(__dirname, "../content")
 
@@ -15,9 +15,9 @@ run(false)
     .catch(e => console.error(e))
 
 async function run(verbose: boolean): Promise<void> {
-    if (verbose) console.log(__dirname, prototypesDir, converterDir, contentDir)
-    if (!fs.existsSync(prototypesDir)) {
-        console.log("Unable to find RMC-14 Prototypes directory")
+    if (verbose) console.log(__dirname, resourcesDir, converterDir, contentDir)
+    if (!fs.existsSync(resourcesDir)) {
+        console.log("Unable to find RMC-14 Resources directory")
     }
     if (!fs.existsSync(converterDir)) {
         console.log("Unable to find prototype converter directory")
@@ -26,7 +26,8 @@ async function run(verbose: boolean): Promise<void> {
     for (let fileName of fs.readdirSync(converterDir).filter(file => file.endsWith(".ts"))) {
         console.log(chalk.yellowBright.bold(`=== Running Converter ${fileName} ===`))
         let {default: file} = await import(path.join("file://", converterDir, fileName))
-        let newClass = await new file(verbose, prototypesDir, contentDir) as PrototypeConverter
+        let newClass = await new file(verbose, resourcesDir, contentDir) as PrototypeConverter
+        await newClass.setup()
         await newClass.run()
     }
 }

@@ -1,5 +1,5 @@
 // @ts-ignore
-import {PrototypeConverter} from "./converter.ts";
+import {PrototypeConverter} from "../converter.ts";
 import chalk from "chalk";
 
 export default class Prototype {

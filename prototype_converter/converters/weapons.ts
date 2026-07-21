@@ -3,7 +3,7 @@ import * as fs from "node:fs";
 // @ts-ignore
 import {PrototypeConverter} from "../converter.ts";
 // @ts-ignore
-import Prototype from "../prototype.ts";
+import Prototype from "../robustClasses/prototype.ts";
 import chalk from "chalk";
 
 export default class WeaponsPrototypeConverter extends PrototypeConverter {
@@ -147,8 +147,11 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
                 }
             }
         })
-        // If this specific item doesnt have lore, dont get from parents
-        formattedData.lore = prototype.tryGetComponentValue("RMCLoreExaminable", ["content"], "")
+
+        await prototype.tryGetPrototypeValue(prototype, "RMCLoreExaminable", ["content"], async (value) => {
+            // @ts-ignore
+            formattedData.lore = this.getLocaleString(value).replaceAll("\n", "<br>")
+        })
 
         formattedData.sprite = await prototype.getSprite()
         if (this.verbose) console.log(`- ${chalk.green(prototype.id)} "${prototype.name}"`)
