@@ -31,10 +31,12 @@ export default class Prototype {
 
     async setup() {
         await this.tryGetPrototype(this, "name", async (value: string) => {
-            this.name = value
+            // @ts-ignore
+            this.name = value.replaceAll("'", "").replaceAll('"', "")
         })
         await this.tryGetPrototype(this, "description", async (value: string) => {
-            this.description = value
+            // @ts-ignore
+            this.description = value.replaceAll("'", "").replaceAll('"', "")
         })
     }
 
@@ -115,5 +117,24 @@ export default class Prototype {
             console.error(e)
             return false
         }
+    }
+
+    async getSprite() {
+        let sprite = ["Effects/crayondecals.rsi/questionmark.png"]
+        await this.tryGetPrototypeValue(this, "Sprite", [], async (value) => {
+            if (value.layers && value.layers.length > 0) {
+                sprite = []
+                for (const layer of value.layers) {
+                    if (layer.sprite) {
+                        sprite.push(`${layer.sprite}/${layer.state}.png`)
+                    } else {
+                        sprite.push(`${value.sprite}/${layer.state}.png`)
+                    }
+                }
+            } else if (value.sprite && value.state) {
+                sprite = [`${value.sprite}/${value.state}.png`]
+            }
+        })
+        return sprite
     }
 }

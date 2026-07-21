@@ -4,7 +4,9 @@ import StatsBar from "~/components/global/Weapon/StatsBar.vue";
 const props = defineProps<{
   magazines: Array<{
     name: string,
-    icon: string,
+    id: string,
+    description: string,
+    sprite: Array<string>,
     color?: string,
     capacity?: number,
     damage?: number,
@@ -12,9 +14,6 @@ const props = defineProps<{
   }>,
 }>()
 
-function getIconPath (path: string, state: string = "base") {
-  return `https://github.com/RMC-14/RMC-14/blob/master/Resources/Textures/${path}/${state}.png?raw=true`
-}
 </script>
 
 <template>
@@ -23,14 +22,13 @@ function getIconPath (path: string, state: string = "base") {
     <div v-for="(value, key) in props.magazines"
         :key="key"
         :title="value.name">
-      <sprite-img :path="getIconPath(value.icon)" class="size-20 float-right">
-        <div v-if="value.color" class="absolute pixelated size-full">
-          <div class="drop-shadow-example">
-            <nuxt-img class="pixelated size-full" :src="getIconPath(value.icon, 'ammo_band')"/>
-            <nuxt-img class="pixelated size-full duplicate" :src="getIconPath(value.icon, 'ammo_band')" :style="`filter: drop-shadow(0px 1000px 0 ${value.color});`"/>
-          </div>
-        </div>
-      </sprite-img>
+      <sprite-img :sprite="value.sprite" class="size-20 float-right"/>
+      <hatnote icon="false">
+        ID: {{value.id}}
+      </hatnote>
+      <pull-quote>
+        {{value.description}}
+      </pull-quote>
       <table class="table-fixed border-collapse text-md bg-content-bg">
         <tbody>
         <tr class="h-10" v-if="value.capacity">

@@ -72,11 +72,17 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
             id: prototype.id || "Undefined Prototype",
             description: prototype.description || "No Description Given",
             stats: {} as Record<string, string>,
-            attachments: {} as Record<string, Array<string>>,
+            attachments: {} as Record<string, Array<{
+                id: string,
+                name: string,
+                description: string,
+                sprite: Array<string>,
+            }>>,
             magazines: [] as Array<{
                 name: string,
-                id: string
-                icon: string,
+                id: string,
+                description: string,
+                sprite: Array<string>,
                 color?: string,
                 capacity?: number,
                 damage?: number,
@@ -84,77 +90,67 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
             }>,
             lore: ""}
 
-        let attachments: Record<string, Array<string>> = {}
-        if (prototype.components.has("AttachableHolder")) {
-            for (let slotName of Object.keys(prototype.components.get("AttachableHolder").slots)) {
-                const slotNameFormatted = slotName.replace("rmc-aslot-", "")
-                attachments[slotNameFormatted] = prototype.components.get("AttachableHolder").slots[slotName].whitelist.tags
-            }
-        }
-
-        let stats: Record<string, string> = {}
         await prototype.tryGetPrototypeValue(prototype, "RMCSelectiveFire", ["baseFireModes"], async (value) => {
-            stats["fireMode"] = value
+            formattedData.stats["fireMode"] = value
         })
         await prototype.tryGetPrototypeValue(prototype, "RMCWeaponAccuracy", ["accuracyMultiplier"], async (value) => {
-            stats["accuracyWielded"] = value
+            formattedData.stats["accuracyWielded"] = value
         })
         await prototype.tryGetPrototypeValue(prototype, "RMCWeaponAccuracy", ["accuracyMultiplierUnwielded"], async (value) => {
-            stats["accuracyUnWielded"] = value
+            formattedData.stats["accuracyUnWielded"] = value
         })
         await prototype.tryGetPrototypeValue(prototype, "RMCSelectiveFire", ["baseFireRate"], async (value) => {
-            stats["fireRate"] = value
+            formattedData.stats["fireRate"] = value
         })
         await prototype.tryGetPrototypeValue(prototype, "RMCSelectiveFire", ["recoilUnwielded"], async (value) => {
-            stats["recoil"] = value
+            formattedData.stats["recoil"] = value
         })
 
-        formattedData.magazines = [
-            {
-                name: "M54C magazine (10x24mm)",
-                id: "CMMagazineRifleM54C",
-                icon: "_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi",
-                capacity: 40,
-                damage: 40,
-                ap: 5
-            },
-            {
-                name: "M54C AP magazine (10x24mm)",
-                id: "CMMagazineRifleM54CAP",
-                icon: "_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi",
-                color: "#1F951F",
-                capacity: 40,
-                damage: 30,
-                ap: 40
-            },
-            {
-                name: "M54C extended magazine (10x24mm)",
-                id: "CMMagazineRifleM54CExt",
-                icon: "_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi",
-                capacity: 60,
-                damage: 40,
-                ap: 5
-            }
-        ]
+        await prototype.tryGetPrototypeValue(prototype, "ItemSlots", ["slots", "gun_magazine","whitelist","tags"], async (value) => {
+            for await (let magazineId of value) {
+                if (this.prototypeCache.has(magazineId)) {
+                    let mag = this.prototypeCache.get(magazineId)
+                    let data = {
+                        name: mag.name,
+                        id: mag.id,
+                        description: mag.description,
+                        sprite: await mag.getSprite(),
+                        capacity: 0,
+                        damage: 0,
+                        ap: 0
+                    }
 
+                    await mag.tryGetPrototypeValue(mag, "BallisticAmmoProvider", ["capacity"], async (value) => {
+                        data.capacity = value
+                    })
+
+                    formattedData.magazines.push(data)
+                }
+            }
+        })
+
+        await prototype.tryGetPrototypeValue(prototype, "AttachableHolder", ["slots"], async (value) => {
+            for await (let slotName of Object.keys(value)) {
+                const slotNameFormatted = slotName.replace("rmc-aslot-", "")
+                formattedData.attachments[slotNameFormatted] = []
+
+                for await (let attachmentId of value[slotName].whitelist.tags) {
+                    if (this.prototypeCache.has(attachmentId)) {
+                        let attachment = this.prototypeCache.get(attachmentId)
+                        formattedData.attachments[slotNameFormatted].push({
+                            id: attachment.id,
+                            name: attachment.name,
+                            description: attachment.description,
+                            sprite: await attachment.getSprite()
+                        })
+                    }
+                }
+            }
+        })
         // If this specific item doesnt have lore, dont get from parents
         formattedData.lore = prototype.tryGetComponentValue("RMCLoreExaminable", ["content"], "")
 
-        formattedData.sprite = ["Effects/crayondecals.rsi/questionmark.png"]
-        await prototype.tryGetPrototypeValue(prototype, "Sprite", [], async (value) => {
-            if (value.layers && value.layers.length > 0) {
-                formattedData.sprite = []
-                for (const layer of value.layers) {
-                    if (layer.sprite) {
-                        formattedData.sprite.push(`${layer.sprite}/${layer.state}.png`)
-                    } else {
-                        formattedData.sprite.push(`${value.sprite}/${layer.state}.png`)
-                    }
-                }
-            } else if (value.sprite && value.state) {
-                formattedData.sprite = [`${value.sprite}/${value.state}.png`]
-            }
-        })
+        formattedData.sprite = await prototype.getSprite()
         if (this.verbose) console.log(`- ${chalk.green(prototype.id)} "${prototype.name}"`)
         return `
 ## ${formattedData.displayName}
