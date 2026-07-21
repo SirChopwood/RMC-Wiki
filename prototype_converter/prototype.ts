@@ -133,6 +133,26 @@ export default class Prototype {
                 }
             } else if (value.sprite && value.state) {
                 sprite = [`${value.sprite}/${value.state}.png`]
+            } else {
+                let tempSprite = ""
+                let tempState = ""
+                await this.tryGetPrototypeValue(this, "Sprite", ["sprite"], async (value) => {
+                    tempSprite = value
+                })
+                await this.tryGetPrototypeValue(this, "Sprite", ["state"], async (value) => {
+                    tempState = value
+                })
+                if (tempSprite === "") {
+                    await this.tryGetPrototypeValue(this, "Sprite", ["layers"], async (value) => {
+                        tempSprite = value[0].sprite
+                    })
+                }
+                if (tempState === "") {
+                    await this.tryGetPrototypeValue(this, "Sprite", ["layers"], async (value) => {
+                        tempState = value[0].state
+                    })
+                }
+                sprite = [`${tempSprite}/${tempState}.png`]
             }
         })
         return sprite

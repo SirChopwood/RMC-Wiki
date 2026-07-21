@@ -18,17 +18,17 @@ const statType: Record<string, {
   accuracyWielded: {
     name: "Accuracy (Wielded)",
     tooltip: "Multiplier to Accuracy when Wielding the weapon with both hands.",
-    max: 3
+    max: 2
   },
   accuracyUnWielded: {
     name: "Accuracy (Un-Wielded)",
     tooltip: "Multiplier to Accuracy when only holding the weapon with one hand.",
-    max: 3
+    max: 2
   },
   fireRate: {
     name: "Fire Rate",
     tooltip: "The rate at which the weapon fires per second.",
-    max: 5
+    max: 10
   },
   recoil: {
     name: "Recoil",

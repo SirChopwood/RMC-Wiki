@@ -9,7 +9,7 @@ function getTexturePath(layer: string) {
 </script>
 
 <template>
-  <nuxt-link v-if="sprite && sprite.length > 0" :to="getTexturePath(props.sprite[0]!)" external class="relative block aspect-square rounded m-2" style="background: var(--page-bg);">
+  <nuxt-link v-if="sprite && sprite.length > 0" :to="getTexturePath(props.sprite[0]!)" external class="relative block aspect-square rounded m-2 overflow-clip" style="background: var(--page-bg);">
     <nuxt-img v-for="layer of props.sprite" :src="getTexturePath(layer)" class="absolute pixelated w-full scale-95"/>
     <slot/>
   </nuxt-link>

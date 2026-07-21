@@ -31,7 +31,7 @@
 :pull-quote[The actual firearm in the 4-piece ML79A Smartgun System. If you have this, youre about to bring some serious pain to anyone in your way. You may toggle firing restrictions by using a special action.]
 :weapon-stats{:stats='{"fireMode":["FullAuto"],"accuracyWielded":1.05,"fireRate":5}'}
 :weapon-attachments{:attachments='{"rail":[{"id":"RMCAttachmentRailFlashlight","name":"rail flashlight","description":"A flashlight, for rails, on guns. Can be toggled on and off. A better light source than standard M3 pattern armor lights.","sprite":["undefined/flashlight.png","undefined/flashlight-on.png"]}]}'}
-:weapon-ammunition{:magazines='[{"name":"ML79A drum magazine irradiated (10x30mm)","id":"RMCMagazineSmartGunirradiated","sprite":["Effects/crayondecals.rsi/questionmark.png"],"capacity":500,"damage":0,"ap":0},{"name":"ML66A drum magazine (10x30mm)","id":"RMCMagazineSmartGun","sprite":["_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun.rsi/base.png","_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun.rsi/mag-1.png"],"capacity":500,"damage":0,"ap":0}]'}
+:weapon-ammunition{:magazines='[{"name":"ML79A drum magazine irradiated (10x30mm)","id":"RMCMagazineSmartGunirradiated","sprite":["_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun_deplated.rsi/base.png"],"capacity":500,"damage":0,"ap":0},{"name":"ML66A drum magazine (10x30mm)","id":"RMCMagazineSmartGun","sprite":["_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun.rsi/base.png","_RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun.rsi/mag-1.png"],"capacity":500,"damage":0,"ap":0}]'}
 
 ---
 
