@@ -17,8 +17,8 @@ const props = defineProps<{
 </script>
 
 <template>
-  <h3>Ammunition</h3>
-  <tabs>
+  <h3 v-if="props.magazines.length > 0">Ammunition</h3>
+  <tabs v-if="props.magazines.length > 0">
     <div v-for="(value, key) in props.magazines"
         :key="key"
         :title="value.name">

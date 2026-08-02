@@ -10,8 +10,8 @@ const props = defineProps<{
 </script>
 
 <template>
-  <h3>Attachments</h3>
-  <accordion>
+  <h3 v-if="Object.keys(props.attachments).length > 0">Attachments</h3>
+  <accordion v-if="Object.keys(props.attachments).length > 0">
     <div v-for="(value, key) in props.attachments" :key="key" :title="key">
       <div v-for="attachment in value">
         <sprite-img :sprite="attachment.sprite" class="size-12 float-right"/>

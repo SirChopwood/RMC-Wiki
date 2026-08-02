@@ -2,7 +2,7 @@
 import { ref, useSlots, computed } from 'vue'
 
 const slots = useSlots()
-const openIndex = ref<number | null>(0)
+const openIndex = ref<number | null>(null)
 
 const items = computed(() => {
   const defaultSlot = slots.default ? slots.default() : []
