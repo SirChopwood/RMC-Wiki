@@ -46,13 +46,19 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
             stats: {} as Record<string, any>,
             lore: ""}
 
-        await prototype.tryGetPrototypeValue(prototype, "CMArmor", [], async (value) => {
-            let armorValues = {}
-            for (let key of Object.keys(value)) {
-                if (Number(value[key])) armorValues[key] = Number(value[key])
-            }
-            formattedData.stats["armor"] = armorValues
-        })
+        let armorValues = {}
+        const armorValueTypes = [
+            "melee",
+            "bullet",
+            "bio",
+            "explosionArmor"
+        ]
+        for await (let armorValueType of armorValueTypes) {
+            await prototype.tryGetPrototypeValue(prototype, "CMArmor", [armorValueType], async (value) => {
+                armorValues[armorValueType] = Number(value)
+            })
+        }
+        formattedData.stats["armor"] = armorValues
 
         formattedData.stats["speedTier"] = "light"
         await prototype.tryGetPrototypeValue(prototype, "RMCArmorSpeedTier", ["speedTier"], async (value) => {

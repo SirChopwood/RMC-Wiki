@@ -36,7 +36,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/Armor/bulletproof/vest.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: RMCArmorBulletproof]
 :pull-quote[A vest that excels in protecting the wearer against high-velocity solid projectiles.]
-:weapon-stats{:stats='{"armor":{"bullet":30},"speedTier":"light"}'}
+:weapon-stats{:stats='{"armor":{"melee":15,"bullet":30,"bio":20,"explosionArmor":10},"speedTier":"light"}'}
 
 ---
 
@@ -91,7 +91,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/cbrn.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: RMCArmorCBRN]
 :pull-quote[While lacking the appearance of the M3 pattern armor worn in regular service, this armor piece is still a derivative of it. It has been heavily modified to fit over the MOPP suit with additional padding and Venlar composite layers removed, so as not to restrict the wearer’s movement. However, with the reduction of composite layers, the personal protection offered is less than desired with complaints having been lodged since 2165.]
-:weapon-stats{:stats='{"armor":{"melee":20,"bullet":20,"explosionArmor":20,"bio":10},"speedTier":"heavy"}'}
+:weapon-stats{:stats='{"armor":{"melee":20,"bullet":20,"bio":10,"explosionArmor":20},"speedTier":"heavy"}'}
 
 ---
 
@@ -179,7 +179,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/jungle.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: CMArmorB12]
 :pull-quote[A lightweight suit of carbon fiber body armor built for quick movement. Designed in a lovely forest green. Use it to toggle the built-in flashlight.]
-:weapon-stats{:stats='{"armor":{"melee":25,"bio":25},"speedTier":"medium"}'}
+:weapon-stats{:stats='{"armor":{"melee":25,"bullet":20,"bio":25,"explosionArmor":20},"speedTier":"medium"}'}
 
 ---
 
@@ -223,7 +223,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/Armor/m3/t/jungle.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: RMCArmorM3TDemo]
 :pull-quote[A custom set of M3 armor designed for users of long-ranged explosive weaponry. Provides better protection against explosives than standard M3 armor, while remaining nimble.]
-:weapon-stats{:stats='{"armor":{"explosionArmor":30},"speedTier":"light"}'}
+:weapon-stats{:stats='{"armor":{"melee":20,"bullet":20,"bio":20,"explosionArmor":30},"speedTier":"light"}'}
 
 ---
 
@@ -245,7 +245,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/Armor/m3/scout/jungle.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: RMCArmorM3Scout]
 :pull-quote[A custom set of M3 armor designed for Marine Scouts.]
-:weapon-stats{:stats='{"armor":{"melee":25},"speedTier":"light"}'}
+:weapon-stats{:stats='{"armor":{"melee":25,"bullet":20,"bio":20,"explosionArmor":20},"speedTier":"light"}'}
 
 ---
 
@@ -256,7 +256,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/Armor/m4/jungle.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: CMArmorM4]
 :pull-quote[A well tinkered and crafted hybrid of Smart-Gunner mesh and M3 pattern plates. Robust, yet nimble, with room for all your pouches.]
-:weapon-stats{:stats='{"armor":{"bio":25},"speedTier":"medium"}'}
+:weapon-stats{:stats='{"armor":{"melee":20,"bullet":20,"bio":25,"explosionArmor":20},"speedTier":"medium"}'}
 
 ---
 
@@ -267,7 +267,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: CMArmorM35]
 :pull-quote[A custom set of M35 armor designed for use by UNMC Pyrotechnicians.]
-:weapon-stats{:stats='{"armor":{"bio":25},"speedTier":"medium"}'}
+:weapon-stats{:stats='{"armor":{"melee":20,"bullet":20,"bio":25,"explosionArmor":20},"speedTier":"medium"}'}
 
 ---
 
@@ -278,7 +278,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/jungle.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: CMArmorM45]
 :pull-quote[A lightweight ghillie camouflage suit, used by UNMC snipers on recon missions. Very lightweight, but doesnt protect much.]
-:weapon-stats{:stats='{"armor":{"bio":25},"speedTier":"light"}'}
+:weapon-stats{:stats='{"armor":{"melee":20,"bullet":20,"bio":25,"explosionArmor":20},"speedTier":"light"}'}
 
 ---
 
@@ -289,7 +289,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/Armor/ml66a/jungle.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: CMArmorSmartGunCombatHarness]
 :pull-quote[A heavy protective vest designed to be worn with the ML66A Smart Gun System. It has specially designed straps and reinforcement to carry the Smartgun and accessories.]
-:weapon-stats{:stats='{"speedTier":"light"}'}
+:weapon-stats{:stats='{"armor":{},"speedTier":"light"}'}
 
 ---
 
@@ -322,7 +322,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/SPP/spp.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: RMCArmorSPP]
 :pull-quote[Standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as tin men.]
-:weapon-stats{:stats='{"armor":{"bullet":30,"bio":15,"explosionArmor":20},"speedTier":"medium"}'}
+:weapon-stats{:stats='{"armor":{"melee":20,"bullet":30,"bio":15,"explosionArmor":20},"speedTier":"medium"}'}
 
 ---
 
@@ -333,7 +333,7 @@
 :weapon-profile{:sprite='["_RMC14/Objects/Clothing/OuterClothing/SPP/army.rsi/icon.png"]'}
 :hatnote{icon=false}[ID: RMCArmorSPPArmy]
 :pull-quote[An older SPP personal armor system thats since been replaced by the SPP Army Standard 6B90 body armor. It is still used by certain SPP Army units that the SPP doesnt expect to see much combat.]
-:weapon-stats{:stats='{"armor":{"melee":15,"bullet":15,"explosionArmor":15},"speedTier":"light"}'}
+:weapon-stats{:stats='{"armor":{"melee":15,"bullet":15,"bio":20,"explosionArmor":15},"speedTier":"light"}'}
 
 ---
 
