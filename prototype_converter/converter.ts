@@ -45,7 +45,8 @@ export class PrototypeConverter {
         for await (let filePath of await this.getFilesInDirectory(directories)) {
             if (this.verbose) console.log(`${chalk.bold.grey(filePath)}`)
             try {
-                const file = fs.readFileSync(filePath, 'utf8')
+                let file = fs.readFileSync(filePath, 'utf8')
+                file = file.replace(/^\uFEFF/gm, "") // To prevent UTF8-BOM from fucking things up
                 const data = YAML.parse(file, {strict: false, logLevel: "error"}) as Array<any>
                 for (const proto of data) {
                     if (proto.type !== "entity" || !proto.id) continue
@@ -86,7 +87,8 @@ export class PrototypeConverter {
         for await (let filePath of await this.getFilesInDirectory(directories)) {
             if (this.verbose) console.log(`${chalk.grey(filePath)}`)
             try {
-                const file = fs.readFileSync(filePath, 'utf8')
+                let file = fs.readFileSync(filePath, 'utf8')
+                file = file.replace(/^\uFEFF/gm, "") // To prevent UTF8-BOM from fucking things up
                 const data = YAML.parse(file, {strict: false, logLevel: "error"}) as Array<any>
                 for (const proto of data) {
                     if (proto.type !== "entity") continue
