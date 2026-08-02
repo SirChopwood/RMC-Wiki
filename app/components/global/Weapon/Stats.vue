@@ -2,7 +2,7 @@
 import StatsBar from "~/components/global/Weapon/StatsBar.vue";
 
 const props = defineProps<{
-  stats: Record<string, string>
+  stats: Record<string, any>
 }>()
 
 const fireModes: Record<string, string> = {
@@ -25,6 +25,12 @@ const fireModes: Record<string, string> = {
           >{{mode}}</span>
         </td>
       </tr>
+      <stats-bar
+          v-if="props.stats.damage"
+          v-for="damageType in Object.keys(props.stats.damage)"
+          type="damage"
+          :value="Number(props.stats.damage[damageType])"
+          :label="damageType"/>
       <stats-bar
           v-if="props.stats.accuracyWielded"
           type="accuracyWielded"

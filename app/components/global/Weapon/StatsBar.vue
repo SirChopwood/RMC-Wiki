@@ -2,6 +2,7 @@
 const props = defineProps<{
   type: string
   value: number
+  label?: string
 }>()
 
 const BarInner = useTemplateRef("BarInner")
@@ -54,7 +55,7 @@ onMounted(() => {
 
 <template>
   <tr class="h-10 group hover:cursor-help" :title="getType().tooltip">
-    <th class="h-full group-hover:text-(--link)">{{getType().name}}
+    <th class="h-full group-hover:text-(--link)">{{getType().name}}<span v-if="props.label"> ({{props.label}})</span>
     </th>
     <td class="h-full relative">
       <div class="bevel w-full bg-(--page-bg) rounded p-1 h-full">

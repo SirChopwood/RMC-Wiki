@@ -43,7 +43,7 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
 
         for await (const wepCat of this.weaponCategories) {
             fs.writeFileSync(
-                path.join(this.contentDir, "weapons", `${wepCat.toLowerCase()}.md`),
+                path.join(this.contentDir, "equipment/ranged", `${wepCat.toLowerCase()}.md`),
                 await this.convertDirectories([`_RMC14/Entities/Objects/Weapons/Guns/${wepCat}`])
             )
         }
