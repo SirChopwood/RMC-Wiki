@@ -46,6 +46,11 @@ const statType: Record<string, {
     tooltip: "Amount of armour ignored when struck by the attack.",
     max: 100
   },
+  armor: {
+    name: "Armor",
+    tooltip: "Damage reduction when worn.",
+    max: 50
+  }
 }
 
 onMounted(() => {

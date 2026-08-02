@@ -10,6 +10,12 @@ const fireModes: Record<string, string> = {
   Burst: "Fires a single burst of bullets per pull of the trigger.",
   FullAuto: "Fires continuously as long as the trigger is held."
 }
+
+const speedTiers: Record<string, string> = {
+  light: "Very fast with near unrestricted movement.",
+  medium: "Standard walking pace for most.",
+  heavy: "Slow and sluggish, easily outpaced by others."
+}
 </script>
 
 <template>
@@ -25,6 +31,20 @@ const fireModes: Record<string, string> = {
           >{{mode}}</span>
         </td>
       </tr>
+      <tr v-if="props.stats.speedTier" class="h-10">
+        <th class="h-full w-1/3">Speed Tier</th>
+        <td class="relative h-full flex flex-row gap-4 items-center">
+            <span class="hover:cursor-help hover:text-(--link) underline hover:decoration-(--link)"
+                  :title="speedTiers[props.stats.speedTier]"
+            >{{props.stats.speedTier}}</span>
+        </td>
+      </tr>
+      <stats-bar
+          v-if="props.stats.armor"
+          v-for="armorType in Object.keys(props.stats.armor)"
+          type="armor"
+          :value="Number(props.stats.armor[armorType])"
+          :label="armorType"/>
       <stats-bar
           v-if="props.stats.damage"
           v-for="damageType in Object.keys(props.stats.damage)"

@@ -152,6 +152,7 @@ export default class Prototype {
                         tempState = value[0].state
                     })
                 }
+                if (tempState === "") tempState = "icon"
                 sprite = [`${tempSprite}/${tempState}.png`]
             }
         })

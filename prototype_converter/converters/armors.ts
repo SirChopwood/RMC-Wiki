@@ -1,0 +1,81 @@
+import * as path from 'path';
+import * as fs from "node:fs";
+// @ts-ignore
+import {PrototypeConverter} from "../converter.ts";
+// @ts-ignore
+import Prototype from "../robustClasses/prototype.ts";
+import chalk from "chalk";
+
+export default class WeaponsPrototypeConverter extends PrototypeConverter {
+    weaponTypeParents = [
+        "CMArmorM3Medium",
+        "RMCArmorVest",
+        "RMCArmorVestXLBase"
+    ]
+
+    async run(): Promise<void> {
+        await this.addDirectoriesToCache(["_RMC14/Entities/Clothing/"])
+        fs.writeFileSync(
+            path.join(this.contentDir, "equipment", `armors.md`),
+            await this.convertDirectories([`_RMC14/Entities/Clothing/OuterClothing`])
+        )
+    }
+
+    override async convertPrototype(prototype: Prototype) {
+        let parentMatch = false
+        if (Array.isArray(prototype.parents)) {
+            for (const parent of prototype.parents) {
+                if (this.weaponTypeParents.includes(parent) && !prototype.object.abstract) {
+                    parentMatch = true
+                }
+            }
+        } else {
+            if (this.weaponTypeParents.includes(prototype.parents) && !prototype.object.abstract) {
+                parentMatch = true
+            }
+        }
+        if (!parentMatch) {
+            return ""
+        }
+
+        let formattedData = {
+            displayName: prototype.name || "Undefined Prototype",
+            sprite: [] as Array<string>,
+            id: prototype.id || "Undefined Prototype",
+            description: prototype.description || "No Description Given",
+            stats: {} as Record<string, any>,
+            lore: ""}
+
+        await prototype.tryGetPrototypeValue(prototype, "CMArmor", [], async (value) => {
+            let armorValues = {}
+            for (let key of Object.keys(value)) {
+                if (Number(value[key])) armorValues[key] = Number(value[key])
+            }
+            formattedData.stats["armor"] = armorValues
+        })
+
+        formattedData.stats["speedTier"] = "light"
+        await prototype.tryGetPrototypeValue(prototype, "RMCArmorSpeedTier", ["speedTier"], async (value) => {
+            formattedData.stats["speedTier"] = value
+        })
+
+        await prototype.tryGetPrototypeValue(prototype, "RMCLoreExaminable", ["content"], async (value) => {
+            // @ts-ignore
+            formattedData.lore = this.getLocaleString(value).replaceAll("\n", "<br>")
+        })
+
+        formattedData.sprite = await prototype.getSprite()
+        if (this.verbose) console.log(`- ${chalk.green(prototype.id)} "${prototype.name}"`)
+        return `
+## ${formattedData.displayName}
+:weapon-profile{:sprite='${JSON.stringify(formattedData.sprite)}'}
+:hatnote{icon=false}[ID: ${formattedData.id}]
+:pull-quote[${formattedData.description}]
+:weapon-stats{:stats='${JSON.stringify(formattedData.stats)}'}
+${formattedData.lore ? `:collapsible{title="Show Lore"}[${formattedData.lore}]` : ""}
+---
+\n<br><br><br><br><br><br><br><br>\n
+`
+    }
+}
+
