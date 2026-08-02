@@ -68,12 +68,38 @@ This one is missing its smart optics completely, and seems to be damaged, greatl
 <br><br><br><br><br><br><br><br>
 
 
+## M83 grenade launcher
+:weapon-profile{:sprite='["_RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83_main.rsi/base.png","_RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83_main.rsi/camo.png","_RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83_main.rsi/mag-0.png"]'}
+:hatnote{icon=false}[ID: WeaponLauncherM83]
+:pull-quote[A heavy, 6-shot grenade launcher used by the UNMC for area denial and big explosions.]
+:weapon-stats{:stats='{"fireMode":["SemiAuto"],"fireRate":0.675}'}
+:weapon-attachments{:attachments='{"rail":[{"id":"RMCAttachmentMagneticHarness","name":"magnetic harness","description":"A magnetically attached harness kit that attaches to the rail mount of a weapon. When dropped, the weapon will sling to any set of Marine armor.","sprite":["_RMC14/Objects/Weapons/Guns/Attachments/rail.rsi/magnetic.png"]}]}'}
+:weapon-ammunition{:magazines='[]'}
+
+---
+
+<br><br><br><br><br><br><br><br>
+
+
 ## M85A1 grenade launcher
 :weapon-profile{:sprite='["_RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m85a1/m85a1_icon.rsi/base.png"]'}
 :hatnote{icon=false}[ID: RMCWeaponLauncherM85A1]
 :pull-quote[A heavy, low-angle, break-action 40mm grenade launcher. Archaic in core design, inferior to more modern semi automatic M92, M95 grenade launchers and M94 impact launcher, but doesnt require a magnetic armature or an advanced expertice to operate, not to mention near flawless reliability, extremely low cost and low weight due to mostly being made out of polymer materials.]
 :weapon-stats{:stats='{"fireRate":0.3125}'}
 :weapon-attachments{:attachments='{"rail":[{"id":"RMCAttachmentRailFlashlight","name":"rail flashlight","description":"A flashlight, for rails, on guns. Can be toggled on and off. A better light source than standard M3 pattern armor lights.","sprite":["undefined/flashlight.png","undefined/flashlight-on.png"]},{"id":"RMCAttachmentMagneticHarness","name":"magnetic harness","description":"A magnetically attached harness kit that attaches to the rail mount of a weapon. When dropped, the weapon will sling to any set of Marine armor.","sprite":["_RMC14/Objects/Weapons/Guns/Attachments/rail.rsi/magnetic.png"]},{"id":"RMCAttachmentS5RedDotSight","name":"S5 red-dot sight","description":"An AEGIS S5 red-dot sight. A zero-magnification optic that offers faster, and more accurate target acquisition.","sprite":["_RMC14/Objects/Weapons/Guns/Attachments/rail.rsi/reddot.png"]},{"id":"RMCAttachmentS6ReflexSight","name":"S6 reflex sight","description":"An AEGIS S6 reflex sight. A zero-magnification alternative to iron sights with a more open optic window when compared to the S5 red-dot. Helps to reduce scatter during automated fire.","sprite":["_RMC14/Objects/Weapons/Guns/Attachments/rail.rsi/reflex.png"]}]}'}
+:weapon-ammunition{:magazines='[]'}
+
+---
+
+<br><br><br><br><br><br><br><br>
+
+
+## M81 Riot grenade launcher
+:weapon-profile{:sprite='["_RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m81.rsi/base.png"]'}
+:hatnote{icon=false}[ID: RMCWeaponLauncherM81]
+:pull-quote[The M81 riot grenade launcher is a single-shot, shoulder-fired, break-action grenade launcher designed for police use with Less-lethal munitions.]
+:weapon-stats{:stats='{"fireMode":["SemiAuto"],"fireRate":0.833}'}
+:weapon-attachments{:attachments='{}'}
 :weapon-ammunition{:magazines='[]'}
 
 ---
