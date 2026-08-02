@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
+@custom-variant light (&:where(.light, .light *));
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant retro (&:where(.retro, .retro *));
 
 @theme {
   --color-page-bg: var(--page-bg);
@@ -58,6 +60,23 @@
     --row-hover-bg: #2c3138;   
 }
 
+.retro {
+    --page-bg: #000000;
+    --content-bg: #000000;
+    --sidebar-bg: #000000;
+    --border: #44bb29;
+    --border-light: #7dff60;
+    --text: #e1e3e6;
+    --text-muted: #969ca4;
+    --link: #2be000;
+    --link-visited: #2be000;
+    --link-hover: #5cf934;
+    --toc-bg: #000000;
+    --header-band: #1c3418;
+    --focus-color: #5cf934;
+    --row-hover-bg: #2c3138;
+}
+
 
 *{ box-sizing: border-box; }
 
@@ -113,4 +132,8 @@ html {
     image-rendering: crisp-edges;
     /* Chromium + Safari */
     image-rendering: pixelated;
+}
+
+.bevel {
+    clip-path: polygon(0 0,calc(100% - 0.5rem) 0,100% 0.5rem,100% 100%,0.5rem 100%,0 calc(100% - 0.5rem));
 }

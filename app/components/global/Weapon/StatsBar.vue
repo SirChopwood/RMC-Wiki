@@ -57,9 +57,9 @@ onMounted(() => {
     <th class="h-full group-hover:text-(--link)">{{getType().name}}
     </th>
     <td class="h-full relative">
-      <div class="w-full bg-(--page-bg) rounded p-1 h-full">
-        <div ref="BarInner" class="min-w-fit bg-(--text-muted) group-hover:bg-(--link) rounded h-full text-sm text-(--content-bg) font-bold px-1 content-center">
-          <span class="h-fit">{{props.value}}</span>
+      <div class="bevel w-full bg-(--page-bg) rounded p-1 h-full">
+        <div ref="BarInner" class="bevel min-w-fit bg-(--text-muted) retro:bg-(--header-band) group-hover:bg-(--link) min-h-6 h-full text-sm text-(--content-bg) font-bold px-1 content-center">
+          <span class="bevel h-fit bg-(--page-bg)/75 px-2 text-(--text)">{{props.value}}</span>
         </div>
       </div>
     </td>

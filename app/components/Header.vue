@@ -46,7 +46,7 @@ const redirectPath = ref('/')
 
 const colorMode = useColorMode()
 
-const setTheme = (theme: 'light' | 'dark') => {
+const setTheme = (theme: 'light' | 'dark' | 'retro') => {
     colorMode.preference = theme
 }
 </script>
@@ -78,7 +78,7 @@ const setTheme = (theme: 'light' | 'dark') => {
                 <div class="flex flex-col relative">
                     <ClientOnly>
                         <div class="flex gap-1.5 text-[11px] font-body items-end text-center mx-auto sm:mx-0">
-                            <span class="text-text-muted hidden sm:block">Design:</span>
+                            <span class="text-text-muted hidden sm:block">Theme:</span>
                             <button class="cursor-pointer" @click="setTheme('light')"
                                 :class="colorMode.value === 'light' ? 'text-focus font-medium' : 'text-link hover:underline'">
                                 [ Light ]
@@ -86,6 +86,10 @@ const setTheme = (theme: 'light' | 'dark') => {
                             <button class="cursor-pointer" @click="setTheme('dark')"
                                 :class="colorMode.value === 'dark' ? 'text-focus font-medium' : 'text-link hover:underline'">
                                 [ Dark ]
+                            </button>
+                            <button class="cursor-pointer" @click="setTheme('retro')"
+                                    :class="colorMode.value === 'retro' ? 'text-focus font-medium' : 'text-link hover:underline'">
+                              [ Retro ]
                             </button>
                         </div>
                     </ClientOnly>
@@ -95,16 +99,16 @@ const setTheme = (theme: 'light' | 'dark') => {
                         <input v-model="searchQuery" @blur="closeSearch"
                             @focus="isDropdownOpen = searchResults.length > 0" :disabled="status !== 'ready'"
                             type="text" :placeholder="status === 'ready' ? 'Search wiki...' : 'Indexing...'"
-                            class="w-full sm:w-56 py-1 px-2 border border-border rounded-xs bg-white dark:bg-sidebar-bg font-body text-sm text-text focus:outline-none focus:border-focus focus:ring-1 focus:ring-focus disabled:opacity-50">
+                            class="w-full sm:w-56 py-1 px-2 border border-border rounded-xs bg-white dark:bg-sidebar-bg retro:bg-sidebar-bg font-body text-sm text-text focus:outline-none focus:border-focus focus:ring-1 focus:ring-focus disabled:opacity-50">
                     </div>
 
                     <div v-if="isDropdownOpen"
-                        class="absolute top-full right-0 mt-1 w-72 bg-white dark:bg-sidebar-bg border border-border rounded-xs shadow-lg overflow-hidden max-h-72 overflow-y-auto z-50">
+                        class="absolute top-full right-0 mt-1 w-72 bg-white dark:bg-sidebar-bg retro:bg-sidebar-bg border border-border rounded-xs shadow-lg overflow-hidden max-h-72 overflow-y-auto z-50">
                         <ul class="list-none m-0 p-0">
                             <li v-for="result in searchResults" :key="result.id"
                                 class="border-b border-border-light last:border-0">
                                 <NuxtLink :to="result.id"
-                                    class="block p-2 hover:bg-[#f6f8fa] dark:hover:bg-[#2d333b] text-left no-underline">
+                                    class="block p-2 hover:bg-[#f6f8fa] dark:hover:bg-[#2d333b] retro:hover:bg-(--header-band) text-left no-underline">
                                     <div class="text-xs font-bold text-link truncate">{{ result.title }}</div>
 
                                     <div v-if="result.snippets?.content"
@@ -123,8 +127,8 @@ const setTheme = (theme: 'light' | 'dark') => {
 
 <style>
 .search-snippet mark {
-    background-color: #fff5b8;
-    color: #24292e;
+    background-color: var(--focus-color);
+    color: var(--page-bg);
     font-weight: 600;
     padding: 0 2px;
     border-radius: 2px;

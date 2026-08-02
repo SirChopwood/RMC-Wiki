@@ -92,7 +92,7 @@ watch(
                     {{ item.name }}
                 </NuxtLink>
 
-                <span class="text-[#72777d] select-none mx-0.75">
+                <span class="text-[#72777d] select-none mx-1">
                     {{ separator }}
                 </span>
             </template>
