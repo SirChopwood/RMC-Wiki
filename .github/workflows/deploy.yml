@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  prepare:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -42,11 +42,6 @@ jobs:
             Resources/Prototypes/
             Resources/Locale/
 
-  build:
-    needs: prepare
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Convert Prototypes
         run: npm run convert
 
