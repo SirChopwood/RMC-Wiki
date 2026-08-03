@@ -5,6 +5,8 @@ on:
     branches:
       - main
   workflow_dispatch:
+  repository_dispatch:
+    types: [deploy-site]
 
 permissions:
   contents: read
@@ -16,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  prepare:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,6 +32,23 @@ jobs:
 
       - name: Install dependencies
         run: npm install --frozen-lockfile
+
+      - name: Sparse Checkout Main Repo
+        uses: actions/checkout@v7
+        with:
+          repository: RMC-14/RMC-14
+          path: RMC14
+          sparse-checkout: |
+            Resources/Prototypes/
+            Resources/Locale/
+
+  build:
+    needs: prepare
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Convert Prototypes
+        run: npm run convert
 
       - name: Generate static site
         run: npm run generate

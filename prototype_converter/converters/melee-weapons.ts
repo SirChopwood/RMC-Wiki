@@ -10,12 +10,13 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
     weaponTypeParents = [
         "RMCBaseMeleeWeapon"
     ]
+    outputDir = path.join(this.contentDir, "equipment")
 
     async run(): Promise<void> {
         await this.addDirectoriesToCache(["_RMC14/Entities/Objects/Weapons"])
 
         fs.writeFileSync(
-            path.join(this.contentDir, "equipment", `melee-weapons.md`),
+            path.join(this.outputDir, `melee-weapons.md`),
             await this.convertDirectories([`_RMC14/Entities/Objects/Weapons/Melee`])
         )
     }

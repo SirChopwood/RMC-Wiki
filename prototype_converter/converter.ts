@@ -11,6 +11,7 @@ export class PrototypeConverter {
     verbose: boolean
     resourcesDir: string
     contentDir: string
+    outputDir: string = ""
     prototypeCache: Map<string, Prototype> = new Map()
     localeCache: Map<string, Locale> = new Map()
 
@@ -18,12 +19,15 @@ export class PrototypeConverter {
         this.verbose = verbose
         this.resourcesDir = resourcesDir
         this.contentDir = contentDir
-
     }
 
     async setup() {
         this.localeCache.set("en-US", new Locale(this, this.resourcesDir, "en-US", "_RMC14"))
         await this.localeCache.get("en-US").setup()
+
+        if (!fs.existsSync(this.outputDir)) {
+            fs.mkdirSync(this.outputDir)
+        }
     }
 
     getLocaleString(target: string, language: string = "en-US") {

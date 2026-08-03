@@ -37,13 +37,14 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
         "SMGs",
         "Snipers"
     ]
+    outputDir = path.join(this.contentDir, "equipment/ranged")
 
     async run(): Promise<void> {
         await this.addDirectoriesToCache(["_RMC14/Entities/Objects/Weapons"])
 
         for await (const wepCat of this.weaponCategories) {
             fs.writeFileSync(
-                path.join(this.contentDir, "equipment/ranged", `${wepCat.toLowerCase()}.md`),
+                path.join(this.outputDir, `${wepCat.toLowerCase()}.md`),
                 await this.convertDirectories([`_RMC14/Entities/Objects/Weapons/Guns/${wepCat}`])
             )
         }

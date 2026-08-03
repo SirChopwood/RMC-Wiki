@@ -12,11 +12,12 @@ export default class WeaponsPrototypeConverter extends PrototypeConverter {
         "RMCArmorVest",
         "RMCArmorVestXLBase"
     ]
+    outputDir = path.join(this.contentDir, "equipment")
 
     async run(): Promise<void> {
         await this.addDirectoriesToCache(["_RMC14/Entities/Clothing/"])
         fs.writeFileSync(
-            path.join(this.contentDir, "equipment", `armors.md`),
+            path.join(this.outputDir, `armors.md`),
             await this.convertDirectories([`_RMC14/Entities/Clothing/OuterClothing`])
         )
     }
