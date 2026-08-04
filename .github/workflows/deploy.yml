@@ -36,7 +36,7 @@ jobs:
       - name: Sparse Checkout Main Repo
         uses: actions/checkout@v7
         with:
-          repository: RMC-14/RMC-14
+          repository: ${{github.repository_owner}}/RMC-14
           path: RMC14
           sparse-checkout: |
             Resources/Prototypes/
