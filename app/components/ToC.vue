@@ -18,17 +18,17 @@ defineProps({
             Table of Contents
         </div>
 
-        <ol v-if="tocLinks.length" class="m-0 list-decimal list-inside">
+        <ol v-if="tocLinks.length" class="m-0 list-inside">
             <li v-for="link in tocLinks" :key="link.id"
                 class="mt-1 mb-1 [counter-increment:toc-main] [counter-reset:toc-sub]">
-                <NuxtLink :to="`#${link.id}`" class="text-text! hover:text-link-hover! no-underline">
+                - <NuxtLink :to="`#${link.id}`" class="text-text! hover:text-link-hover! no-underline">
                     <span class="text-text-muted! mr-1 [content:counter(toc-main)_'.']"></span>{{ link.text }}
                 </NuxtLink>
 
-                <ol v-if="link.children && link.children.length" class="pl-4.5 mt-0.5 mb-1 list-inside list-decimal">
+                <ol v-if="link.children && link.children.length" class="pl-4.5 mt-0.5 mb-1 list-inside list-none">
                     <li v-for="subLink in link.children" :key="subLink.id"
                         class="mt-0.75 mb-0.75 [counter-increment:toc-sub]">
-                        <NuxtLink :to="`#${subLink.id}`" class="text-text! hover:text-link-hover! no-underline">
+                        - <NuxtLink :to="`#${subLink.id}`" class="text-text! hover:text-link-hover! no-underline">
                             <span
                                 class="text-text-muted! mr-1 [font-variant-numeric:tabular-nums] [content:counter(toc-main)_'.'_counter(toc-sub)]"></span>{{
                                     subLink.text }}
@@ -47,7 +47,7 @@ defineProps({
             </summary>
 
             <div class="px-3 py-2 border-t border-border-light">
-                <ol class="m-0 pl-4 list-decimal list-outside [counter-reset:toc-main]">
+                <ol class="m-0 pl-4 list-none list-inside [counter-reset:toc-main]">
                     <li v-for="link in tocLinks" :key="link.id"
                         class="mt-1 mb-1 [counter-increment:toc-main] [counter-reset:toc-sub]">
 
@@ -55,7 +55,7 @@ defineProps({
                             {{ link.text }}
                         </NuxtLink>
 
-                        <ol v-if="link.children?.length" class="pl-4 mt-1 list-decimal list-outside">
+                        <ol v-if="link.children?.length" class="pl-4 mt-1 list-none list-inside">
                             <li v-for="subLink in link.children" :key="subLink.id"
                                 class="my-1 [counter-increment:toc-sub]">
                                 <NuxtLink :to="`#${subLink.id}`"

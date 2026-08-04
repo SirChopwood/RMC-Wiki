@@ -59,12 +59,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <tr class="h-10 group hover:cursor-help" :title="getType().tooltip">
-    <th class="h-full group-hover:text-(--link)">{{getType().name}}<span v-if="props.label"> ({{props.label}})</span>
+  <tr class="h-10 group/stat hover:cursor-help" :title="getType().tooltip">
+    <th class="h-full group-hover/stat:text-(--link) transition-all duration-100">{{getType().name}}<span v-if="props.label"> ({{props.label}})</span>
     </th>
     <td class="h-full relative">
       <div class="bevel-sm w-full bg-(--page-bg) rounded p-1 h-full">
-        <div ref="BarInner" class="bevel-sm min-w-fit max-w-full bg-(--text-muted) retro:bg-(--header-band) group-hover:bg-(--link) min-h-6 h-full text-sm text-(--content-bg) font-bold px-1 content-center">
+        <div ref="BarInner" class="bevel-sm min-w-fit max-w-full bg-(--text-muted) retro:bg-(--header-band) group-hover/stat:bg-(--link) transition-all duration-100 min-h-6 h-full text-sm text-(--content-bg) font-bold px-1 content-center">
           <span class="bevel-sm h-fit bg-(--page-bg)/75 px-2 text-(--text)">{{props.value}}</span>
         </div>
       </div>

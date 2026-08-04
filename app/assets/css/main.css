@@ -93,7 +93,7 @@ body {
   line-height: 1.5;
 }
 
-a{ color: var(--link); text-decoration: none; }
+a{ color: var(--link); text-decoration: none; transition: all 100ms; }
 a:visited{ color: var(--link-visited); }
 a:hover{ text-decoration: underline; color: var(--link-hover); }
 a:focus-visible{ outline: 2px solid #36c; outline-offset: 1px; }
