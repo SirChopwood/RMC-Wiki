@@ -54,7 +54,7 @@ const statType: Record<string, {
 }
 
 onMounted(() => {
-  BarInner.value!.style.width = `${(props.value / getType().max)*100}%`
+  BarInner.value!.style.width = `${Math.min((props.value / getType().max)*100, 100)}%`
 })
 </script>
 
@@ -64,7 +64,7 @@ onMounted(() => {
     </th>
     <td class="h-full relative">
       <div class="bevel w-full bg-(--page-bg) rounded p-1 h-full">
-        <div ref="BarInner" class="bevel min-w-fit bg-(--text-muted) retro:bg-(--header-band) group-hover:bg-(--link) min-h-6 h-full text-sm text-(--content-bg) font-bold px-1 content-center">
+        <div ref="BarInner" class="bevel min-w-fit max-w-full bg-(--text-muted) retro:bg-(--header-band) group-hover:bg-(--link) min-h-6 h-full text-sm text-(--content-bg) font-bold px-1 content-center">
           <span class="bevel h-fit bg-(--page-bg)/75 px-2 text-(--text)">{{props.value}}</span>
         </div>
       </div>
