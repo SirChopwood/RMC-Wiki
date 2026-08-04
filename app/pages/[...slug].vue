@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import Content from '~/components/Content.vue';
+import Footer from '~/components/Footer.vue';
 import Header from '~/components/Header.vue';
 import Sidebar from '~/components/Sidebar.vue';
 import ToC from '~/components/ToC.vue';
@@ -33,11 +34,12 @@ defineOgImage('WikiPage', {
 <template>
     <Header @open-sidebar="isSidebarOpen = true" />
     <Trace :title="data?.title" />
-    <div class="w-full mx-auto sm:grid sm:grid-cols-[260px_minmax(0,1fr)_260px] items-start min-h-0">
+    <main class="w-full mx-auto sm:grid sm:grid-cols-[260px_minmax(0,1fr)_260px] items-start grow min-h-full h-fit">
         <Sidebar :is-open="isSidebarOpen" @close="isSidebarOpen = false" />
         <ToC :is-mobile=true :toc-links="tocLinks" />
 
         <Content :data="data ? data : null" />
         <ToC :is-mobile=false :toc-links="tocLinks"/>
-    </div>
+    </main>
+    <Footer/>
 </template>

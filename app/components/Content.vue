@@ -8,8 +8,8 @@ defineProps({
 </script>
 
 <template>
-    <div class="bg-content-bg pt-4.5 px-6.5 pb-10 border-r border-l border-border min-h-screen w-full max-w-275 justify-self-center relative">
-        <ContentRenderer v-if="data" :value="data" class="renderer" :components="{
+    <div class="py-4 h-full w-full max-w-275 justify-self-center relative">
+        <ContentRenderer v-if="data" :value="data" class="renderer bg-content-bg pt-4 pb-10 px-6.5 border border-border h-full" :components="{
             h1: 'ProseH1',
             h2: 'ProseH2',
             h3: 'ProseH3',

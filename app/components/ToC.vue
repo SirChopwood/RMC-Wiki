@@ -18,7 +18,7 @@ defineProps({
             Table of Contents
         </div>
 
-        <ol v-if="tocLinks.length" class="m-0 pl-4 list-decimal list-outside">
+        <ol v-if="tocLinks.length" class="m-0 list-decimal list-inside">
             <li v-for="link in tocLinks" :key="link.id"
                 class="mt-1 mb-1 [counter-increment:toc-main] [counter-reset:toc-sub]">
                 <NuxtLink :to="`#${link.id}`" class="text-text! hover:text-link-hover! no-underline">

@@ -43,7 +43,7 @@ function isGroupOpen(path: string) {
 </script>
 
 <template>
-    <aside class="hidden sm:block sticky top-2 h-[calc(100dvh-0.5rem)] pt-3 min-h-0 pb-16 w-fit max-w-96 overflow-y-scroll">
+    <aside class="hidden sm:block sticky top-2 h-full pt-3 min-h-0 pb-16 w-fit max-w-96 overflow-y-scroll">
         <div v-for="group in navigation" :key="group.path" class="mb-3.5 px-4">
             <h3 v-if="group.children.length > 0" @click="toggleGroup(group.path)"
                 class="cursor-pointer flex items-center select-none justify-between text-xl uppercase tracking-[0.02em] text-text-muted mb-1 font-bold border-b border-border-light pb-0.75 text-nowrap">
