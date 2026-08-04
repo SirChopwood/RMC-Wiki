@@ -22,6 +22,7 @@
   --color-focus: var(--focus-color);
   --text-13: 0.8125rem;
   --color-row-hover-bg: var(--row-hover-bg);
+  --bevel-size: var(--bevel-size);
 }
 
 :root{
@@ -41,6 +42,7 @@
     --font-heading: "JetBrains Mono", monospace;
     --focus-color: #820000;
     --row-hover-bg: #fbfbfc;
+    --bevel-size: 1rem;
 }
 
 .dark {
@@ -83,7 +85,6 @@
 
 body {
   margin: 0;
-  background: var(--page-bg);
   color: var(--text);
   font-family: var(--font-body);
   font-size: 14px;
@@ -136,5 +137,13 @@ html {
 }
 
 .bevel {
-    clip-path: polygon(0 0,calc(100% - 0.5rem) 0,100% 0.5rem,100% 100%,0.5rem 100%,0 calc(100% - 0.5rem));
+    clip-path: polygon(0 0,calc(100% - var(--bevel-size)) 0,100% var(--bevel-size),100% 100%,var(--bevel-size) 100%,0 calc(100% - var(--bevel-size)));
+}
+
+@utility bevel-tr {
+    clip-path: polygon(0 0,calc(100% - var(--bevel-size)) 0,100% var(--bevel-size),100% 100%,0 100%);
+}
+
+@utility bevel-bl {
+    clip-path: polygon(0 0,100% 0,100% 100%,var(--bevel-size) 100%,0 calc(100% - var(--bevel-size)));
 }
