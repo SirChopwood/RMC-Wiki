@@ -33,7 +33,7 @@ function toggle(index: number) {
       <button
         type="button"
         @click="toggle(index)"
-        class="w-full flex items-center justify-between text-left px-3 py-2 bg-header-band retro:hover:text-(--page-bg) hover:bg-border-light text-[13px] font-bold text-text group-first:bevel-tr group-last:bevel-bl"
+        class="w-full flex items-center justify-between text-left px-3 py-2 bg-header-band retro:hover:text-(--page-bg) hover:bg-border-light text-[13px] font-bold text-text group-first:bevel-tr group-last:bevel-bl group-only:bevel-lg"
       >
         {{ item.title }}
         <span class="text-text-muted">{{ openIndex === index ? '−' : '+' }}</span>
