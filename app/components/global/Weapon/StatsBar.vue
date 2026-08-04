@@ -63,9 +63,9 @@ onMounted(() => {
     <th class="h-full group-hover:text-(--link)">{{getType().name}}<span v-if="props.label"> ({{props.label}})</span>
     </th>
     <td class="h-full relative">
-      <div class="bevel w-full bg-(--page-bg) rounded p-1 h-full">
-        <div ref="BarInner" class="bevel min-w-fit max-w-full bg-(--text-muted) retro:bg-(--header-band) group-hover:bg-(--link) min-h-6 h-full text-sm text-(--content-bg) font-bold px-1 content-center">
-          <span class="bevel h-fit bg-(--page-bg)/75 px-2 text-(--text)">{{props.value}}</span>
+      <div class="bevel-sm w-full bg-(--page-bg) rounded p-1 h-full">
+        <div ref="BarInner" class="bevel-sm min-w-fit max-w-full bg-(--text-muted) retro:bg-(--header-band) group-hover:bg-(--link) min-h-6 h-full text-sm text-(--content-bg) font-bold px-1 content-center">
+          <span class="bevel-sm h-fit bg-(--page-bg)/75 px-2 text-(--text)">{{props.value}}</span>
         </div>
       </div>
     </td>

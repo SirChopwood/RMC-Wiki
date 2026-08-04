@@ -22,7 +22,8 @@
   --color-focus: var(--focus-color);
   --text-13: 0.8125rem;
   --color-row-hover-bg: var(--row-hover-bg);
-  --bevel-size: var(--bevel-size);
+  --bevel-large: var(--bevel-large);
+  --bevel-small: var(--bevel-small);
 }
 
 :root{
@@ -42,7 +43,8 @@
     --font-heading: "JetBrains Mono", monospace;
     --focus-color: #820000;
     --row-hover-bg: #fbfbfc;
-    --bevel-size: 1rem;
+    --bevel-large: 1rem;
+    --bevel-small: 0.5rem;
 }
 
 .dark {
@@ -136,14 +138,18 @@ html {
     image-rendering: pixelated;
 }
 
-.bevel {
-    clip-path: polygon(0 0,calc(100% - var(--bevel-size)) 0,100% var(--bevel-size),100% 100%,var(--bevel-size) 100%,0 calc(100% - var(--bevel-size)));
+@utility bevel-lg {
+    clip-path: polygon(0 0,calc(100% - var(--bevel-large)) 0,100% var(--bevel-large),100% 100%,var(--bevel-large) 100%,0 calc(100% - var(--bevel-large)));
+}
+
+@utility bevel-sm {
+    clip-path: polygon(0 0,calc(100% - var(--bevel-small)) 0,100% var(--bevel-small),100% 100%,var(--bevel-small) 100%,0 calc(100% - var(--bevel-small)));
 }
 
 @utility bevel-tr {
-    clip-path: polygon(0 0,calc(100% - var(--bevel-size)) 0,100% var(--bevel-size),100% 100%,0 100%);
+    clip-path: polygon(0 0,calc(100% - var(--bevel-large)) 0,100% var(--bevel-large),100% 100%,0 100%);
 }
 
 @utility bevel-bl {
-    clip-path: polygon(0 0,100% 0,100% 100%,var(--bevel-size) 100%,0 calc(100% - var(--bevel-size)));
+    clip-path: polygon(0 0,100% 0,100% 100%,var(--bevel-large) 100%,0 calc(100% - var(--bevel-large)));
 }

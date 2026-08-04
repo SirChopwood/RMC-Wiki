@@ -24,7 +24,7 @@ function toggle(index: number) {
 </script>
 
 <template>
-  <div class="rounded-xs my-4 p-2 bg-(--page-bg) bevel">
+  <div class="rounded-xs my-4 p-2 bg-(--page-bg) bevel-lg">
     <div
       v-for="(item, index) in items"
       :key="index"
