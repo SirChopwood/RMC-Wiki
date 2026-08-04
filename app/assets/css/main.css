@@ -75,6 +75,7 @@
     --header-band: #1c3418;
     --focus-color: #5cf934;
     --row-hover-bg: #2c3138;
+    text-shadow: var(--link-hover) 0 0 3px;
 }
 
 
