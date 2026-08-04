@@ -70,7 +70,7 @@ export class PrototypeConverter {
         for await (let dirPath of directories) {
             let fullPath = path.join(this.resourcesDir, "Prototypes", dirPath)
             if (!fs.existsSync(fullPath)) {
-                console.log(`Unable to find Prototypes directory: ${path}`)
+                console.log(`Unable to find Prototypes directory: ${fullPath}`)
             }
             files = files.concat(fs.readdirSync(fullPath, {recursive: true})
                 .map((fileName) => {
